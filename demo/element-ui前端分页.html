@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<h3>前端实现分页</h3>
+<template>
+    <el-table :data="tableData ? tableData.slice((currentPage-1)*page_size,currentPage*page_size):tableData"
+        style="width: 100%">
+        <el-table-column prop="date" label="日期" width="180">
+        </el-table-column>
+        <el-table-column prop="name" label="姓名" width="180">
+        </el-table-column>
+        <el-table-column prop="address" label="地址">
+        </el-table-column>
+    </el-table>
+</template>
+
+
+<div class="block">
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+        :page-sizes="[100, 200, 300, 400]" :page-size="page_size" layout="total, sizes, prev, pager, next, jumper"
+        :total="400">
+    </el-pagination>
+</div>
+
+<body>
+    <script>
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+        }
+        handleCurrentChange(val) {
+            console.log(`当前页: ${val}`);
+        }
+
+    </script>
+</body>
+
+</html>

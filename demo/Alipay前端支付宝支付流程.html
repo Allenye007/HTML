@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>电脑端调用支付宝</h3>
+    <p>前端这块代码不是很复杂，在网上找了一些案例，就是后端返回一个form，插入body中，然后执行submit唤起支付宝</p>
+    <p>电脑端调用支付宝，流程很简单，在页面有一个立即支付的按钮，点击进入商户的后台，商户的后台将支付所需的参数传给支付宝，支付宝返回给商户一个字符串形式的form表单，商户将这个form表单传给前台，前台对表单进行提交即可跳转到支付包页面，用户在支付宝页面支付完成后，支付宝会先调取我们的通知接口进行支付结果通知。然后跳转到我们传给支付包的回调页面。这就是电脑端调用支付宝的整个流程。</p>
+    <div style="width:200px;height:200px;background:red;" onclick="to()"></div>
+</body>
+<script src="../js/jquery-1.12.1.js"></script>
+<script>
+    var prodConfig = {
+        "body": "body",
+        "subject": "daledou",
+        "out_trade_no": "70501111111S001111110",
+        "timeout_express": "90m",
+        "total_amount": 9.00,
+        "product_code": "QUICK_WAP_WAY"
+    }
+    var alipayConfig = {
+        biz_content: JSON.stringify(prodConfig),
+        app_id: '自己的appid',
+        version: '1.0',
+        format: 'json',
+        sign_type: 'RSA2',
+        method: 'alipay.trade.wap.pay',
+        notify_url: 'http://***/alipy/notify_url.php',
+        return_url: 'http://***/alipy/return_url.php',
+        charset: 'UTF-8',
+        sign: 'L3quItR9hqIfsgjZVqDO/L8k5dmdSSn7KCQcHMRsZl0yzFa9im5Ge/ZXZh1sIo+fqr5zJkUUYmZknERw+iPiiNt/w0VLKPzjgzL4afoQ4oS5vnD8SzdccA9C1E5GxjvJCXGseeciQpyNkMmvXwTcL7egS4ukn2dAV0lpcM8KNPJdi+1HlWgAlnFT0Xq6Kqs24GD+Fd4ogpXoWOa3HfSjY1+DY+7FwKyunTvR9isN/kRIckW887GE2Dy2jRSghhANrf47f54SDMu+UcuRsNfxsgwfSTiafTW1q8Eym/2G7PBOWnI0I5llD7bs9Qu3zB/b+IpLlkEa0jUNj1rXgvkjww==',
+        timestamp: '2017-11-15 14:55:46'
+    }
+    function to() {
+        httpPost('https://openapi.alipaydev.com/gateway.do', alipayConfig)
+    }
+    function httpPost(URL, PARAMS) {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+ 
+        for (var x in PARAMS) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            temp.appendChild(opt);
+        }
+ 
+        document.body.appendChild(temp);
+        temp.submit();
+ 
+        return temp;
+    }
+</script>
+</html>

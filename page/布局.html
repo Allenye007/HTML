@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>布局</title>
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<style>
+    @media screen and (max-width: 1000px) {
+        /* 0-1000 */
+        body {
+            background-color: lightblue;
+        }
+        .box li {
+            width: 20%;
+        }
+    }
+
+    @media screen and (min-width: 1000px) {
+        /* >1000 */
+        body {
+            background-color: rgb(221, 227, 230);
+        }
+        .box li {
+            width: 33.33%;
+        }
+    }
+
+    .box {
+        box-sizing: border-box;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .box ul {
+        margin-left: 20px;
+    }
+
+    .box li {
+        display: block;
+        float: left;
+        margin-bottom: 20px;
+    }
+
+    .box .item {
+        margin-right: 20px;
+        border: 1px solid rgb(218, 124, 124);
+        line-height: 100%;
+        height: 200px;
+        display: flex;
+        justify-content:center;
+        align-items:Center;
+    }
+    .inner p {
+        line-height: 20px;
+        opacity: .8;
+    }
+
+    .inner p:hover {
+        /* opacity: 1; */
+        color: red;
+    }
+    .item:hover p {
+        cursor: pointer;
+    }
+    .item:hover {
+        background-color: #ccc;
+    }
+</style>
+
+<body>
+    <a href="../index.html" target="_blank">主页</a>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="item">
+                    <div class="inner">
+                        <p>allen</p>
+                        <p>perter</p>
+                        <p>alax</p>
+                        <p>julis</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    2
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    3
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    4
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    5
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

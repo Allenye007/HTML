@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            position: relative;
+            height: 200px;
+            width: 500px;
+            border: 1px solid red;
+            width: 285px;
+            height: 340px;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 2px 6px 0px rgba(243, 5, 5, 0.5);
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li style="color:red; height: 100px; width: 500px; border: 1px solid yellow">
+            <span>X</span>
+            <p>sasdffd</p>
+            <p>sasdffd</p>
+        </li>
+    </ul>
+
+</body>
+<script>
+    removeFormatMoney(457688923)
+    function removeFormatMoney(s) {
+        return parseFloat(s.replace(/[^\d\.-]/g, ""));
+    }
+</script>
+
+</html>
