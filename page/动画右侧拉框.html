@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        background-color: #ccc;
+        width: 100%;
+        height: 100px;
+        position: relative;
+    }
+
+    .inner {
+        background-color: red;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        top: 0;
+        right: 1000PX;
+        animation: show 3s; 
+    }
+
+    @keyframes show {
+        0% {
+            background: red;
+            right: 0px;
+            top: 0px;
+        }
+
+        100% {
+            background: red;
+            right: 1000px;
+            top: 0px;
+        }
+    }
+</style>
+
+<body>
+    <div class="box">
+        <div class="inner">
+
+        </div>
+    </div>
+</body>
+
+</html>
