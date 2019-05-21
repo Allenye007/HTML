@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tab切换</title>
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<style>
+    .tab {
+        width: 60%;
+        height: 100px;
+        margin: 60px auto;
+        margin-bottom: 20px;
+    }
+    li {
+        height: 100px;
+        width: 20%;
+        background-color: #f1f1f1;
+        border: red 1px solid;
+        text-align: center;
+        line-height: 100px;
+        float: left;
+        box-sizing: border-box;
+        user-select: none;
+        cursor: pointer;
+        border-right: none;
+    }
+    li:last-child {
+        border-right: 1px red solid;
+    }
+    .active {
+        background-color: lightblue;
+    }
+
+    .content {
+        margin: 0 auto;
+        width: 60%;
+    }
+    .content_tab {
+        display: none;
+    }
+    .content_active {
+        display: block;
+    }
+</style>
+
+<body>
+    <ul class="tab">
+        <li class="active"><span>1</span></li>
+        <li><span>2</span></li>
+        <li><span>3</span></li>
+        <li><span>4</span></li>
+        <li><span>5</span></li>
+    </ul>
+    <div class="content">
+        <div class="content_tab content_active">tab11111</div>
+        <div class="content_tab">tab22222</div>
+        <div class="content_tab">tab33333</div>
+        <div class="content_tab">tab44444</div>
+        <div class="content_tab">tab55555</div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        const lis = document.querySelectorAll('li')
+        const content_tabs = document.querySelectorAll('.content_tab')
+        for (let i = 0; i < lis.length; i++) {
+            lis[i].onclick = function () {
+                for(let k = 0 ; k < lis.length; k++) {
+                    lis[k].classList.remove('active')
+                }
+
+                console.log(content_tabs)
+                for(let i = 0 ; i < content_tabs.length; i++) {
+                    content_tabs[i].classList.remove('content_active')
+                }
+
+
+                lis[i].classList.toggle('active')
+                content_tabs[i].classList.toggle('content_active')
+            }
+
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       
+    <meta charset="UTF-8">
+        <title>demo</title>
+        <style>
+        body,
+        dl,
+        dd,
+        dt,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+        }
+
+        ul,
+        ol {
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 1500px;
+        }
+
+        .box-t {
+            height: 100px;
+            width: 100px;
+            background: #CCC;
+            position: fixed;
+            /* position: relative; */
+            left: 81%;
+            top: 83%;
+        }
+
+        .box-b {
+            height: 100px;
+            width: 100px;
+            background: #6CF;
+            position: relative;
+            right: -81%;
+            bottom: -78%;
+        }
+    </style>
+       
+    <script>
+        window.onscroll = function () {
+            var t2 = document.body.scrollHeight;
+            var t1 = document.documentElement.scrollTop || document.body.scrollTop;
+            var t = t2 - t1;
+            console.log(t);
+            var oBox = document.getElementById("box");
+            if (t <= 700) {
+                oBox.className = 'box-b';
+            } else {
+                oBox.className = 'box-t';
+            }
+        };
+    </script>
+
+</head>
+
+<body>
+    <p>
+        document.body.clientWidth ==> BODY对象宽度
+    </p>
+    <p>
+        document.body.clientHeight ==> BODY对象高度
+    </p>
+    <p>
+        document.documentElement.clientWidth ==> 可见区域宽度
+    </p>
+    <p>
+        document.documentElement.clientHeight ==> 可见区域高度
+    </p>
+    <p>
+        document.body.clientWidth ==> 网页可见区域宽
+    </p>
+    <p>
+        document.body.clientHeight ==> 网页可见区域高
+    </p>
+    <p>
+        document.body.offsetWidth ==> 网页可见区域宽(包括边线的宽)
+    </p>
+    <p>
+        document.body.offsetHeight ==> 网页可见区域高(包括边线的高)
+    </p>
+    <p>
+        document.body.scrollWidth ==> 网页正文全文宽document.body.scrollHeight ==> 网页正文全文高
+    </p>
+    <p>
+        document.body.scrollTop ==> 网页被卷去的高
+    </p>
+    <p>
+        document.body.scrollLeft ==> 网页被卷去的左
+    </p>
+    <p>
+        window.screenTop ==> 网页正文部分上
+    </p>
+    <p>
+        window.screenLeft ==> 网页正文部分左
+    </p>
+    <p>
+        window.screen.height ==> 屏幕分辨率的高
+    </p>
+    <p>
+        window.screen.width ==> 屏幕可用工作区高度
+    </p>
+    <p>
+        window.screen.availHeight ==> 屏幕可用工作区高度
+    </p>
+    <p>
+        window.screen.availWidth ==> 屏幕可用工作区宽度
+    </p>
+        <div id="box" class="box-b"></div>
+</body>
+
+</html>
