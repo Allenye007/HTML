@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+        window.onload = function () {
+
+
+            let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJleHAiOjE1NTk3ODczNDEsInVpZCI6NTQsImVtYWlsIjoid2h5NTc0MDExMEAxNjMuY29tIiwibW9iaWxlIjoiMTg4MTMwMzIyNDUiLCJwYXJlbnRfaWQiOjAsInR5cGUiOjEsInNlY3JldF9rZXkiOiIzM3VPUWlHejY0bUQzMG1tNENnS25OMUpwQTIxMFR1VSJ9.'
+            let id = 35
+            let url = `http://develop.api.quclouds.com/api/news/detail?id=${id}&token=${token}`
+
+            handelGet(url)
+
+
+
+            function handelGet(url) {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', url, true)
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        console.log(xhr.responseText, 23423)
+                    }
+                }
+                // xhr.setRequestHeader.token = token
+                xhr.send()
+            }
+
+
+
+
+
+            //- let href = window.location.href
+            let href = 'http://shop.front.osec.com/application/detail?id=1&token=1324sdfsdf&name=allen'
+            console.log(getValue(href))
+            console.log(window.location.href)
+            console.log(GetQueryString(href))
+
+
+
+
+            function getValue(href) {
+                let arr = href.split('?')[1].split('&')
+                let obj = {}
+
+                for (let i = 0; i < arr.length; i++) {
+                    obj[arr[i].split('=')[0]] = arr[i].split('=')[1]
+                }
+
+                return obj
+            }
+
+
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+        }
+    </script>
+</body>
+
+</html>

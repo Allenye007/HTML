@@ -1,0 +1,47 @@
+<div class="menu-extend">
+    <div class="item uinfo"><a href="//center.quclouds.com">方提供对方水电费</a></div>
+    <div class="item"><a href="//center.quclouds.com/"><i class="icon nav user-profile"></i><b
+                class="icon nav user-profile-hover"></b><span>个人中心</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/order"><i class="icon nav user-order"></i><b
+                class="icon nav user-order-hover"></b><span>订单管理</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/authorize"><i class="icon nav user-account"></i><b
+                class="icon nav user-account-hover"></b><span>第三方账户授权</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/aptitude"><i class="icon nav user-aptitude"></i><b
+                class="icon nav user-aptitude-hover"></b><span>资质管理</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/record/pay"><i class="icon nav user-record"></i><b
+                class="icon nav user-record-hover"></b><span>交易记录</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/invoice"><i class="icon nav user-invoice"></i><b
+                class="icon nav user-invoice-hover"></b><span>发票申请</span></a></div>
+    <div class="item"><a href="//center.quclouds.com/email"><i class="icon nav user-email"></i><b
+                class="icon nav user-email-hover"></b><span>邮箱账户</span></a></div>
+    <div class="item logout"><a href="//www.quclouds.com/logout"><i class="icon nav user-logout"></i><b
+                class="icon nav user-logout-hover"></b><span>退出登录</span></a></div>
+</div>
+
+
+     <div id="mapDiv" class="hescgis_map">
+            <div id=buttonDiv><span id="buttonFlag" ></span>
+            <button id="buttonOnMap" >按钮</button></div>
+            <div id="location"></div>    
+     </div>
+
+
+下面分析hover的作用方法：
+
+1、改变本身样式
+
+       #buttonOnMap:hover {
+            background-color: rgba(43, 143, 243, 0.63);
+        }
+
+2、如果你#b元素是#a元素的子元素，可以直接通过 #a #b {...}这种方式定义CSS样式来控制
+
+       #mapDiv:hover #buttonOnMap{
+            background-color: rgba(43, 143, 243, 0.63);
+        }
+
+3、#a与#b是亲兄弟关系，有相同的父节点，且#b跟#a紧临，可以通过 #a + #b{..}来控制#b里面的元素样式；
+
+        #buttonFlag:hover + #buttonOnMap{
+            background-color: rgba(43, 143, 243, 0.63);
+        }

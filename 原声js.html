@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            //- let href = window.location.href
+            let href = 'http://shop.front.osec.com/application/detail?id=99&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJleHAiOjE1NTk3OTIxOTcsInVpZCI6MTAwMiwiZW1haWwiOiJ5dWFucWlhbnFpYW5AYmVoZS5jb20iLCJtb2JpbGUiOiIiLCJwYXJlbnRfaWQiOjB9.'
+
+            let token = getValue(href).token
+            let id = getValue(href).id
+            let url = `http://develop.api.quclouds.com/api/news/detail?id=${id}&token=${token}`
+
+            handelGet(url)
+
+
+
+            function handelGet(url) {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', url, true)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        handelDataBack(JSON.parse(xhr.responseText).data)
+                    }
+                }
+                xhr.send()
+            }
+
+            function handelDataBack(res) {
+                getDOm('.title').innerText = res.title || ''
+                getDOm('.content').appendChild(HTMLDecode(res.content))
+                getDOm('.time').innerText = res.createtime || ''
+                //- getDOm('.img').setattribute('src', res.image_url_domin)
+
+                console.log(getDOm('.temp'))
+            }
+            // 转义富文本编辑器的内容
+            function HTMLDecode(text) {
+                var temp = document.createElement('div')
+                temp.innerHTML = text
+                temp.classList.add('temp')
+                console.log(temp, 12312)
+                return temp
+            }
+            // 获取DOM
+            function getDOm(dom) {
+                return document.querySelector(dom)
+            }
+
+            // 获取参数
+            function getValue(href) {
+                let arr = href.split('?')[1].split('&')
+                let obj = {}
+
+                for (let i = 0; i < arr.length; i++) {
+                    obj[arr[i].split('=')[0]] = arr[i].split('=')[1]
+                }
+
+                return obj
+            }
+        }
+
+    </script>
+</body>
+
+</html>

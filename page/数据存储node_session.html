@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        *    @订单详情
+        *    @author: allenye@aliyun.com
+        */
+        import { Router } from 'express'
+
+        const router = Router()
+
+        router.get('/', function (req, res) {
+            // 取数据
+            let { order = [] } = req.session
+
+            // 对 pug 模板赋值
+            res.render('application/orderDetail', {
+                order: order
+            })
+        })
+
+        router.post('/', function (req, res) {
+            // 向 session 存数据
+            req.session.order = [
+                {
+                    name: '盒子',
+                    money: 100,
+                    count: 20
+                }
+            ]
+            res.json({
+                code: 10000
+            })
+        })
+
+        export default router
+    </script>
+</body>
+
+</html>

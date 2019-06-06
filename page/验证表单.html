@@ -143,6 +143,11 @@
                         }
                     };
                 },
+                watch: {
+                    formData() {
+                        console.log(12312312)
+                    }
+                },
                 methods: {
                     submitForm(formName) {
                         this.$refs[formName].validate((valid) => {
