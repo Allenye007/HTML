@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="test">
+        <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
+            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+            <!-- <i class="el-icon-plus"></i> -->
+            <div class="box">
+                展示
+            </div>
+        </el-upload>
+        <el-dialog :visible.sync="dialogVisible" size="tiny">
+            <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        const form = () => {
+            new Vue({
+                el: '.test',
+                data() {
+                    return {
+                        dialogImageUrl: '',
+                        dialogVisible: false
+                    }
+                },
+                methods: {
+                    handleRemove(file, fileList) {
+                        console.log(file, fileList);
+                    },
+                    handlePictureCardPreview(file) {
+                        this.dialogImageUrl = file.url;
+                        this.dialogVisible = true;
+                    }
+                }
+            })
+        }
+
+        form()
+
+    </script>
+</body>
+
+</html>

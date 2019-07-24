@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let first = function (arr) {
+            let all = []
+            let one = []
+            let two = []
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].parent_id === 0) {
+                    one.push({
+                        id: arr[i].id,
+                        name: arr[i].name,
+                        pid: 0,
+                        isHaveSon: true
+                    })
+                }
+            }
+            console.log(one, 999999)
+
+            for (var k = 0; k < one.length; k++) {
+                for (var j = 0; j < arr.length; j++) {
+                    if (one[k].id !== arr[j].id) {
+                        if (one[k].id === arr[j].parent_id) {
+                            two.push({
+                                id: arr[j].id,
+                                name: arr[j].name,
+                                pid: 1,
+                                isHaveSon: false
+                            })
+                        }
+                    }
+                }
+            }
+            console.log(two, 777777)
+            all = [one, two]
+
+            console.log(all)
+
+        }
+
+        first(dataList)
+    </script>
+</body>
+
+</html>

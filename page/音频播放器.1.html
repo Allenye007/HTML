@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       
+    <meta charset="UTF-8">
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+        .relative {
+            position: relative;
+            /*  根据自身定位  并且自身的位置保留不变 */
+        }
+
+        .absolute {
+            position: absolute;
+            /* 根据最近的有定位的父元素  自身位置被顶替*/
+        }
+
+        .top10 {
+            top: 10px;
+        }
+
+        .left10 {
+            left: 10px;
+        }
+
+        .top50 {
+            top: 50px;
+        }
+
+        .left50 {
+            left: 50px;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        .h100 {
+            height: 100px;
+        }
+
+        .l120 {
+            left: 120px;
+        }
+
+        .process-background {
+            width: 400px;
+            height: 4px;
+            background: #ccc;
+        }
+
+        .process-played {
+            height: 4px;
+            background: #ff9900;
+            width: 0;
+        }
+
+        .circle {
+            width: 15px;
+            height: 15px;
+            background: #ff9900;
+            border-radius: 50%;
+            top: -5px;
+            box-shadow: 0 0 5px #aaa;
+            left: 0;
+        }
+
+        .ml50 {
+            margin-left: 50px;
+        }
+
+        .mt20 {
+            /* margin-top: 20px; */
+        }
+    </style>
+</head>
+
+<body>
+       
+    <!-- autoplay   自动播放 -->
+        <audio class="au" src="../static/陈奕迅 - 你的背包.mp3" controls></audio>
+        <div class="relative">
+                <div class="relative w100 h100">
+                        <img class="absolute play" width="50" onclick="play()" src="../images/bg-01.jpg" alt="">
+                        <img class="absolute display-none pause" width="50" onclick="pause()" src="../images/bg-01.jpg" alt="">
+                    </div>
+                <p class="absolute l120 top10">
+                        <span class="current">00:00</span>/
+                        <span class="total">00:00</span>
+                    </p>
+                <div class="process mt20 ml50">
+                        <div class="process-background relative">
+                                <div class="process-played"></div>
+                                <div onmousedown="start()" class="circle absolute"></div>
+                            </div>
+                    </div>
+            </div>
+
+
+
+       
+    <script>
+        var audio = document.querySelector('.au');
+        var timer;
+        var precent;
+        function play() {
+            audio.play()
+            document.querySelector('.play').classList.add('display-none')
+            document.querySelector('.pause').classList.remove('display-none')
+            document.querySelector('.total').innerHTML = countTime(audio.duration)
+            timer = setInterval(function () {
+                // console.log(audio.currentTime)   当前播放时长
+                document.querySelector('.current').innerHTML = countTime(audio.currentTime)
+                document.querySelector('.circle').style.left = ((audio.currentTime / audio.duration) * 400) + 'px'
+                document.querySelector('.process-played').style.width = ((audio.currentTime / audio.duration) * 400) + 'px'
+            }, 1000)
+        }
+        function pause() {
+            audio.pause()
+            clearInterval(timer)
+            document.querySelector('.play').classList.remove('display-none')
+            document.querySelector('.pause').classList.add('display-none')
+
+        }
+
+
+
+        // 把秒数转换成为 有分钟的时间
+        function countTime(time) {
+            var minutes = Math.floor(time / 60)
+            var seconds = Math.floor(time % 60) + 1
+            if (seconds < 10) {
+                seconds = '0' + seconds  //如果秒小于10，前面加个0
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes  //如果分钟小于10，前面加个0
+            }
+            return minutes + ':' + seconds
+        }
+
+
+        function start(e) {
+            document.body.onmousemove = function () {
+                e = window.event || e
+                move(e)
+            }
+        }     //兼容IE和谷歌、火狐浏览器
+
+
+
+        function move(e) {
+            var ml = e.clientX      // 鼠标距离浏览器左边的值
+            // 如果鼠标距离浏览器左边的值  小于  控制点所能到达的最左边  那么控制点的left为0
+            var process_left = document.getElementsByClassName('process')[0].clientLeft + 50;
+            if (ml < process_left) {
+                document.querySelector('.circle').style.left = '0px'
+                precent = 0;
+                // 如果鼠标距离浏览器左边的值  大于 控制点所能到达的最右边  那么控制点的left值为400
+            } else if (ml > (document.querySelector('.process-background').clientWidth) + 50) {
+                document.querySelector('.circle').style.left = '400px'
+                precent = 1;
+            } else {
+                // 鼠标在进度条的范围内移动   控制点的left值  就等于  鼠标距离浏览器的左边的值 - 控制点所能到达的最左边
+                document.querySelector('.circle').style.left = (ml - 50) + 'px'
+                precent = (ml - 50) / 400
+            }
+            document.body.onmouseup = function () {
+                end();
+            }
+        }
+        function end() {
+            document.body.onmousemove = null;
+            // 播放器当前播放时间  = （控制点的left值  总宽度） * 播放总时长
+            audio.currentTime = precent * audio.duration
+        }
+        // 当播放器播放完毕 执行的回调函数
+        audio.onended = function () {
+            console.log(1111)     //这个功能仅打印测试，有想实现的小伙伴自行测试一下~
+        }
+
+
+
+
+        // 当前播放时长          控制点的left值
+        // ————————————    =    —————————————
+        // 总播放时长              总宽度
+
+
+    </script>
+</body>
+
+</html>

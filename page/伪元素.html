@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fake::before {
+            content: '姓名：';
+            font-size: 12px;
+            display: block;
+            color: red;
+            border: 1px solid blue;
+            height: 100px;
+            width: 100px;
+        }
+        .fake::after {
+            content: '18岁了';
+            font-size: 12px;
+            display: block;
+            color: red;
+        }
+
+        .clear:before {
+            content: '';
+            display: table;
+        }
+        .clear:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .clear {
+            *zoom: 1;
+        }
+
+        .inner {
+            float: left;
+        }
+
+        /* .nthchild li:nth-child(3n) {
+            color: red
+        } */
+
+        /* .nthchild li p:first-child {
+            color: red
+        } */
+
+        .nthchild li span:first-of-type {
+            color: greenyellow;
+        }
+        .nthchild li p:last-of-type {
+            color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <span class="fake">Allen</span>
+    <hr>
+    <div class="box clear">
+        <div class="inner">
+            浮动了
+        </div>
+    </div>
+    <div class="bottom">
+        <p>
+            bottom
+        </p>
+    </div>
+    <hr>
+    <ul class="nthchild">
+        <li>
+            <span>span1</span>
+            <h2>h2</h2>
+            <p>1-8</p>
+            <p>1-8</p>
+            <span>span2</span>
+            <p>1-8</p>
+            <h5>h5</h5>
+        </li>
+        <li>
+            <p>1-8</p>
+            <span>span</span>
+            <p>1-8</p>
+        </li>
+    </ul>
+</body>
+</html>

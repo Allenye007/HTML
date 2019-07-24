@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--该链接可在智齿客服工作台=>设置=>接入渠道中找到-->
+    <script src="https://www.sobot.com/chat/frame/js/entrance.js?sysNum=123123123123" class="zhiCustomBtn" id="zhichiScript">
+    </script>
+    <script>
+        window.onload = function() {
+            zhiManager = window.getzhiSDKInstance()
+            zhiManager.expand()
+        }
+    </script>
+</body>
+
+</html>
