@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ele-展开行</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="test" v-cloak>
+        <h2>tip:expand-row-keys是一个数组，返回值，row-key是一个唯一值</h2>
+        <el-table :data="tableData5" style="width: 100%" :expand-row-keys="expands" :row-key='getRowKeys'
+            @expand-change="expandChange">
+            <el-table-column type="expand">
+                <template slot-scope="props">
+                    <el-form label-position="left" inline class="demo-table-expand">
+                        <el-form-item label="商品名称">
+                            <span>{{ props.row.name }}</span>
+                        </el-form-item>
+                        <el-form-item label="所属店铺">
+                            <span>{{ props.row.shop }}</span>
+                        </el-form-item>
+                        <el-form-item label="商品 ID">
+                            <span>{{ props.row.id }}</span>
+                        </el-form-item>
+                        <el-form-item label="店铺 ID">
+                            <span>{{ props.row.shopId }}</span>
+                        </el-form-item>
+                        <el-form-item label="商品分类">
+                            <span>{{ props.row.category }}</span>
+                        </el-form-item>
+                        <el-form-item label="店铺地址">
+                            <span>{{ props.row.address }}</span>
+                        </el-form-item>
+                        <el-form-item label="商品描述">
+                            <span>{{ props.row.desc }}</span>
+                        </el-form-item>
+                    </el-form>
+                </template>
+            </el-table-column>
+            <el-table-column label="商品 ID" prop="id">
+            </el-table-column>
+            <el-table-column label="商品名称" prop="name">
+            </el-table-column>
+            <el-table-column label="描述" prop="desc">
+            </el-table-column>
+        </el-table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        
+        const form = () => {
+            new Vue({
+                el: '.test',
+                data() {
+                    return {
+                        getRowKeys(row) {
+                            return row.id
+                        },
+                        expands: [],
+                        tableData5: [{
+                            id: '12987122',
+                            name: '好滋好味鸡蛋仔',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987123',
+                            name: '好滋好味鸡蛋仔',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987125',
+                            name: '好滋好味鸡蛋仔',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }, {
+                            id: '12987126',
+                            name: '好滋好味鸡蛋仔',
+                            category: '江浙小吃、小吃零食',
+                            desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',
+                            shop: '王小虎夫妻店',
+                            shopId: '10333'
+                        }]
+
+                    };
+                },
+                methods: {
+                    expandChange(row, expandedRows) {
+                        var that = this
+                        if (expandedRows.length) {
+                            that.expands = []
+                            if (row) {
+                                that.expands.push(row.id)
+                            }
+                        } else {
+                            that.expands = []
+                        }
+                    }
+                }
+            })
+        }
+
+        form()
+
+    </script>
+</body>
+
+</html>
