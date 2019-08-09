@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-moz-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		body {
+			background-color: #f6f6f6;
+			text-align: center;
+		}
+
+		.title {
+			color: #ff0000;
+			margin: 15px 0;
+			width: 100%;
+			font-size: 30px;
+			padding-top: 30px;
+			padding-bottom: 10px;
+			height: 60px;
+			line-height: 60px;
+		}
+
+		.blank {
+			height: 75px;
+		}
+
+		.box {
+			text-align: center;
+		}
+
+		.item {
+			display: inline-block;
+			width: 30%;
+			overflow: hidden;
+			height: 36px;
+			line-height: 36px;
+			border: 1px solid #409eff;
+			opacity: 0.5;
+			margin: 4px;
+			position: relative;
+			border-radius: 3px;
+			box-sizing: border-box;
+		}
+
+		#inp {
+			background-color: #f6f6f6;
+			outline: none;
+			background-image: none;
+			border-radius: 4px;
+			border: 1px solid #bfcbd9;
+			box-sizing: border-box;
+			color: #409eff;
+			font-size: inherit;
+			height: 36px;
+			font-style: 20px;
+			line-height: 1;
+			outline: 0;
+			padding: 3px 10px;
+			transition: border-color .2s;
+			margin-top: 30px;
+		}
+		.btnBox {
+			height: 140px;
+			width: 100%;
+			position: fixed;
+			bottom: 0px;
+		}
+
+		.btnBox div {
+			display: inline-block;
+			width: 60px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+			border-radius: 100%;
+			opacity: .5;
+		}
+
+		#R {
+			float: right;
+			margin-right: 30px;
+			background-color: #aa2727;
+		}
+
+		#L {
+			float: left;
+			margin-left: 30px;
+			background-color: #d3d3d3;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="title">
+		<span id="text"></span>
+	</div>
+	<div class="box" id="box">
+	</div>
+	<input type="text" placeholder="" id="inp">
+	<div class="btnBox">
+		<div id="L">GO</div>
+		<div id="R">STOP</div>
+	</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+	alert(`使用方法： 1.单位之间用“-”分隔；2.输入“清空”清空全部；`);
+
+	let go = document.getElementById('L');
+	let stop = document.getElementById('R');
+	let inp = document.getElementById('inp');
+	let text = document.getElementById('text');
+	let box = document.getElementById('box');
+
+
+	let inpValue = null;
+	let inpValueArr = [];
+	let firstClear = true;
+	let goFirstPush = true;
+	let dataArr = [];
+	let timer = null;
+	let allFlag = 0;
+	let firstClickGo = true;
+
+	let onloadInpValueArrLength = null;
+
+	window.onload = function () {
+		inpValueArr = [1, 2, 3, 4, 5, 6];
+		onloadInpValueArrLength = inpValueArr.length;
+		addChildren(inpValueArr);
+		text.innerText = inpValueArr[0];
+		console.log(new Date().getHours());
+	}
+
+	stop.onclick = function () {
+		clearInterval(timer);
+		text.style.fontSize = `${30}px`
+	}
+
+
+	go.onclick = function () {
+		let childrenLength = box.children.length;
+
+		allFlag += 1;
+		if (goFirstPush) {
+			for (var i = 0; i < childrenLength; i++) {
+				dataArr.push(box.children[i].innerText)
+			}
+			goFirstPush = false;
+		}
+
+		let arr = [];
+		for (var i = 0; i < dataArr.length; i++) {
+			var flag = true;
+			for (var j = 0; j < arr.length; j++) {
+				if (dataArr[i] == arr[j]) {
+					flag = false;
+				};
+			};
+			if (flag) {
+				arr.push(dataArr[i]);
+			};
+		};
+
+		if (firstClickGo) {
+			firstClickGo = false;
+			if (allFlag > 1) {
+				console.log(11111)
+				arr.splice(0, onloadInpValueArrLength)
+			}
+		} else {
+			if (allFlag > 1) {
+				if (inpValueArr.length) {
+					// console.log(, 22222)
+					arr.splice(0, onloadInpValueArrLength)
+				}
+			}
+		}
+		if (arr.length === 0) {
+			arr = inpValueArr
+		}
+
+		clearChildren();
+
+		// 添加去重后的标签
+		console.log(arr);
+		addChildren(arr);
+
+		// 定时器
+		clearInterval(timer);
+		timer = setInterval(function () {
+
+			var index = Math.floor(Math.random() * arr.length);
+
+			text.innerHTML = arr[index];
+			text.style.color = getRGBA()
+			text.style.fontSize = `${randomNum(20, 50)}px`
+		}, 1);
+
+	}
+	// 判断清空还是添加
+	inp.onblur = function () {
+		inpValue = inp.value.trim();
+		inp.value = null;
+		goFirstPush = true;
+		firstClickGo = true;
+
+		if (inpValue === '') {
+			alert('请输入关键字');
+			return;
+		}
+
+		inpValueArr = inpValue.split('-');
+		if (inpValueArr[0] === '清空') {
+
+			inpValueArr = [];
+
+			dataArr = []
+
+			clearChildren();
+
+		};
+
+		if (firstClear) {
+			clearChildren();
+			firstClear = false;
+		}
+
+		addChildren(inpValueArr);
+	}
+
+
+
+
+
+	// 清除子标签
+	function clearChildren() {
+		let clear = () => {
+			for (var i = 0; i < box.children.length; i++) {
+				box.removeChild(box.children[i]);
+			}
+			if (box.children.length) {
+				clear()
+			}
+		}
+		clear();
+		return 000;
+	}
+	// 添加标签
+	function addChildren(inpValueArr) {
+		let arrLength = inpValueArr.length;
+
+		if (arrLength === 1) {
+			var item = document.createElement("div");
+			item.classList.add("item");
+			item.style.color = getRGBA()
+			if (inpValueArr[0] === '') {
+				item.innerText = '无名氏';
+			} else {
+				item.innerText = inpValueArr[0];
+			}
+			box.appendChild(item);
+		} else if (arrLength > 1) {
+			for (var i = 0; i < arrLength; i++) {
+				var item = document.createElement("div");
+				item.classList.add("item");
+				item.style.color = getRGBA()
+				if (inpValueArr[i] === '') {
+					item.innerText = '无名氏';
+				} else {
+					item.innerText = inpValueArr[i];
+				}
+				box.appendChild(item);
+			}
+		}
+	}
+
+	function randomNum(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min);
+	};
+
+	function getRGBA() {
+		return `rgba(${randomNum(0, 255)},${randomNum(0, 255)},${randomNum(0, 255)},1)`;
+	}
+
+</script>

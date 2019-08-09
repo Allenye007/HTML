@@ -40,7 +40,13 @@
                 <el-button @click="resetForm('formData')">重置</el-button>
             </el-form-item>
         </el-form>
-
+        <div>
+            <p>v-model和value的区别</p>
+            <el-input @change="change" v-model="value1"></el-input>
+            <span>v-model:{{value1}}</span>
+            <el-input @change="change" :value="value2"></el-input>
+            <span>value:{{value2}}</span>
+        </div>
     </div>
 
 
@@ -113,6 +119,8 @@
                         }
                     }
                     return {
+                        value1: '',
+                        value2: '',
                         formData: {
                             pass: '',
                             checkPass: '',
@@ -149,6 +157,9 @@
                     }
                 },
                 methods: {
+                    change() {
+                        console.log(this.value1, this.value2)
+                    },
                     submitForm(formName) {
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
