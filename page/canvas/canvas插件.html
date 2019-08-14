@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/base.css">
+</head>
+<style>
+    .musk {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .5)
+    }
+
+    .btnBox {
+        position: fixed;
+        bottom: 6%;
+        height: 60px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 240px;
+        height: 100%;
+        line-height: 60px;
+        font-size: 22px;
+        color: antiquewhite;
+        margin: 0 auto;
+        border-radius: 50px;
+        letter-spacing: 3px;
+        background-color: rgb(175, 29, 29);
+        text-align: center;
+    }
+
+    .imgBox {
+        position: fixed;
+        top: 6%;
+        height: 90%;
+        width: 100%;
+    }
+
+    .imgInner {
+        width: 80.1%;
+        height: 85%;
+        margin: 0 auto;
+        background-color: #f1f1f1;
+    }
+</style>
+
+<body>
+    <div class="musk" v-show="showMusk">
+        <div class="imgBox">
+            <div class="imgInner">
+                <h4>1</h4>
+                <h4>2</h4>
+                <h4>3</h4>
+            </div>
+        </div>
+        <div class="btnBox">
+            <div class="btn" onclick="save()">保存图片</div>
+        </div>
+    </div>
+    <script>
+        function save() {
+            console.log(122312)
+        }
+        window.onload = function () {
+
+        }
+    </script>
+</body>
+
+</html>

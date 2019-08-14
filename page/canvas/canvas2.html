@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/base.css">
+</head>
+<style>
+    .musk {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .5)
+    }
+
+    .btnBox {
+        position: fixed;
+        bottom: 6%;
+        height: 60px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 240px;
+        height: 100%;
+        line-height: 60px;
+        font-size: 22px;
+        color: antiquewhite;
+        margin: 0 auto;
+        border-radius: 50px;
+        letter-spacing: 3px;
+        background-color: rgb(175, 29, 29);
+        text-align: center;
+    }
+
+    .imgBox {
+        position: fixed;
+        top: 6%;
+        height: 90%;
+        width: 100%;
+    }
+
+    .imgInner {
+        width: 80.1%;
+        height: 85%;
+        margin: 0 auto;
+        background-color: #f1f1f1;
+    }
+</style>
+
+<body>
+    <div class="musk" v-show="showMusk">
+        <div class="imgBox">
+            <div class="imgInner">
+                <canvas id="myCanvas">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+            </div>
+        </div>
+        <div class="btnBox">
+            <div class="btn" @click="save">保存图片</div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            draw()
+            function draw() {
+                const url = 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1565607872&di=463ad284a2f1da186bba178814afb1b0&src=http://image.thepaper.cn/www/image/8/856/505.jpg'
+                const canvas = document.getElementById('myCanvas')
+                const ctx = canvas.getContext("2d")
+
+                let width = window.screen.width * 0.8
+                let height = window.screen.height * 0.764
+                canvas.setAttribute('width', width)
+                canvas.setAttribute('height',height)
+                canvas.style.background = '#fff'
+
+                var imgBg = new Image()
+                imgBg.setAttribute("crossOrigin", "Anonymous")
+                imgBg.src = url
+                setTimeout(() => {
+
+                    ctx.fillStyle = "#fff"
+                    ctx.fillRect(0, 0, width, height)
+
+                    // 主图
+                    ctx.drawImage(imgBg, width * 0.05, width * 0.05, width * 0.9, height * 0.75)
+
+                }, 0)
+            }
+        }
+    </script>
+</body>
+</html>
