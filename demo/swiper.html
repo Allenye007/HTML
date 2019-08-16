@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/Swiper/4.5.0/css/swiper.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/Swiper/4.5.0/js/swiper.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .swiper-container {
+            width: 600px;
+            height: 300px;
+            background-color: #ccc;
+        }
+
+        .box {
+            position: relative;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            outline: none
+        }
+
+        .swiper-pagination-bullet-active {
+            display: inline-block;
+            opacity: 1;
+            background: #EE4C47;
+            width: 37px;
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .swiper-pagination-bullet {
+            background: #EE4C47;
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box">
+        <h3>左右切换按钮，在swiper外部</h3>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <!-- 如果需要导航按钮 -->
+            <!-- <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div> -->
+
+        </div>
+        <div class="swiper-button-prev">X</div>
+        <div class="swiper-button-next">X</div>
+    </div>
+
+    <script>
+
+        function Sp() {
+            var mySwiper = new Swiper('.swiper-container', {
+                loop: true, // 循环模式选项
+
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+
+            })
+        }
+        Sp()
+    </script>
+</body>
+
+</html>
